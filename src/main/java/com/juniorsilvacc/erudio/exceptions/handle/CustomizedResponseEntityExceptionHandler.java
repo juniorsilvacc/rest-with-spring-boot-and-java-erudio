@@ -40,7 +40,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 				ex.getMessage(), 
 				request.getDescription(false));
 		
-		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 	
 }
