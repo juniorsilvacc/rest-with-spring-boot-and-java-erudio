@@ -2,16 +2,21 @@ package com.juniorsilvacc.erudio.dtos;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.juniorsilvacc.erudio.models.Person;
 
+@JsonPropertyOrder({"id", "firstName", "lastName", "address", "gender"})
 public class PersonDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	
+	@JsonProperty("first_name")
 	private String firstName;
 	
+	@JsonProperty("last_name")
 	private String lastName;
 	
 	private String address;
