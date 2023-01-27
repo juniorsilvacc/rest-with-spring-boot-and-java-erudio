@@ -12,36 +12,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.juniorsilvacc.erudio.dtos.PersonDTO;
 import com.juniorsilvacc.erudio.models.Person;
 import com.juniorsilvacc.erudio.services.PersonService;
 
 @RestController
 @RequestMapping(value = "/person")
 public class PersonController {
-	
+
 	@Autowired
 	private PersonService service;
-	
+
 	@GetMapping(value = "/{id}")
-	public Person findById(@PathVariable Long id) {
+	public PersonDTO findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
-	
+
 	@GetMapping(value = "/")
-	public List<Person> findAll() {
+	public List<PersonDTO> findAll() {
 		return service.findAll();
 	}
-	
+
 	@PostMapping(value = "/")
-	public Person create(@RequestBody Person person) {
+	public PersonDTO create(@RequestBody Person person) {
 		return service.create(person);
 	}
 
 	@PutMapping(value = "/{id}")
-	public Person update(@RequestBody Person person, @PathVariable Long id) {
+	public PersonDTO update(@RequestBody Person person, @PathVariable Long id) {
 		return service.update(person, id);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
