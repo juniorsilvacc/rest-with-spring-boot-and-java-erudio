@@ -7,7 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import com.juniorsilvacc.erudio.controllers.PersonController;
 import com.juniorsilvacc.erudio.dtos.PersonDTO;
 import com.juniorsilvacc.erudio.exceptions.ResourceNotFoundException;
 import com.juniorsilvacc.erudio.models.Person;
@@ -26,6 +29,8 @@ public class PersonService {
 		
 		PersonDTO dto = new PersonDTO(entity);
 		
+		dto.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		
 		return dto;
 		
 	}
@@ -33,7 +38,11 @@ public class PersonService {
 	public List<PersonDTO> findAll() {
 		List<Person> persons = repository.findAll();
 		
-		return persons.stream().map(PersonDTO::new).collect(Collectors.toList());
+		var listPersons = persons.stream().map(PersonDTO::new).collect(Collectors.toList());
+		
+		listPersons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getId())).withSelfRel()));
+		
+		return listPersons;
 	}
 	
 	public PersonDTO create(Person person) {
@@ -41,6 +50,8 @@ public class PersonService {
 		Person newObj = repository.save(person);
 		
 		PersonDTO dto = new PersonDTO(newObj);
+		
+		dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel());
 		
 		return dto;
 	}
@@ -57,6 +68,8 @@ public class PersonService {
 		Person newPerson = repository.save(oldPerson.get());
 		
 		PersonDTO dto = new PersonDTO(newPerson);
+		
+		dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel());
 		
 		return dto;
 	}
