@@ -12,6 +12,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.juniorsilvacc.erudio.controllers.PersonController;
 import com.juniorsilvacc.erudio.dtos.PersonDTO;
+import com.juniorsilvacc.erudio.exceptions.RequiredObjectIsNullException;
 import com.juniorsilvacc.erudio.exceptions.ResourceNotFoundException;
 import com.juniorsilvacc.erudio.models.Person;
 import com.juniorsilvacc.erudio.repositories.PersonRepository;
@@ -46,7 +47,8 @@ public class PersonService {
 	}
 	
 	public PersonDTO create(Person person) {
-
+		if(person == null) throw new RequiredObjectIsNullException();
+		
 		Person newObj = repository.save(person);
 		
 		PersonDTO dto = new PersonDTO(newObj);
@@ -57,6 +59,8 @@ public class PersonService {
 	}
 	
 	public PersonDTO update(Person person, Long id) {
+		if(person == null) throw new RequiredObjectIsNullException();
+		
 		Optional<Person> oldPerson = repository.findById(id);
 
 		if(!oldPerson.isPresent()) {
