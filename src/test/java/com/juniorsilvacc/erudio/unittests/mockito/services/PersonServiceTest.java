@@ -3,9 +3,9 @@ package com.juniorsilvacc.erudio.unittests.mockito.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +67,53 @@ class PersonServiceTest {
 
 	@Test
 	void testFindAll() {
-		fail("Not yet implemented");
+		List<Person> list = input.mockEntityList();
+		
+		when(repository.findAll()).thenReturn(list);
+		
+		var people = service.findAll();
+		
+		assertNotNull(people);
+		assertEquals(14, people.size());
+		
+		var personOne = people.get(1);
+		
+		assertNotNull(personOne);
+		assertNotNull(personOne.getId());
+		assertNotNull(personOne.getLinks());
+		
+		assertNotNull(personOne.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+		
+		assertEquals("First Name Test1", personOne.getFirstName());
+		assertEquals("Last Name Test1", personOne.getLastName());
+		assertEquals("Addres Test1", personOne.getAddress());
+		assertEquals("Female", personOne.getGender());
+		
+		var personFour = people.get(4);
+		
+		assertNotNull(personFour);
+		assertNotNull(personFour.getId());
+		assertNotNull(personFour.getLinks());
+		
+		assertNotNull(personFour.toString().contains("links: [</api/person/v1/4>;rel=\"self\"]"));
+		
+		assertEquals("First Name Test4", personFour.getFirstName());
+		assertEquals("Last Name Test4", personFour.getLastName());
+		assertEquals("Addres Test4", personFour.getAddress());
+		assertEquals("Male", personFour.getGender());
+		
+		var personSeven = people.get(7);
+		
+		assertNotNull(personSeven);
+		assertNotNull(personSeven.getId());
+		assertNotNull(personSeven.getLinks());
+		
+		assertNotNull(personSeven.toString().contains("links: [</api/person/v1/7>;rel=\"self\"]"));
+		
+		assertEquals("First Name Test7", personSeven.getFirstName());
+		assertEquals("Last Name Test7", personSeven.getLastName());
+		assertEquals("Addres Test7", personSeven.getAddress());
+		assertEquals("Female", personSeven.getGender());
 	}
 
 	@Test
