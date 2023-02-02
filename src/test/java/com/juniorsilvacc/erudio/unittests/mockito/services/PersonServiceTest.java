@@ -56,64 +56,12 @@ class PersonServiceTest {
 		assertNotNull(result.getId());
 		assertNotNull(result.getLinks());
 		
-		System.out.println(result.toString());
 		assertNotNull(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
 		
 		assertEquals("First Name Test1", result.getFirstName());
 		assertEquals("Last Name Test1", result.getLastName());
 		assertEquals("Addres Test1", result.getAddress());
 		assertEquals("Female", result.getGender());
-	}
-
-	@Test
-	void testFindAll() {
-		List<Person> list = input.mockEntityList();
-		
-		when(repository.findAll()).thenReturn(list);
-		
-		var people = service.findAll();
-		
-		assertNotNull(people);
-		assertEquals(14, people.size());
-		
-		var personOne = people.get(1);
-		
-		assertNotNull(personOne);
-		assertNotNull(personOne.getId());
-		assertNotNull(personOne.getLinks());
-		
-		assertNotNull(personOne.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
-		
-		assertEquals("First Name Test1", personOne.getFirstName());
-		assertEquals("Last Name Test1", personOne.getLastName());
-		assertEquals("Addres Test1", personOne.getAddress());
-		assertEquals("Female", personOne.getGender());
-		
-		var personFour = people.get(4);
-		
-		assertNotNull(personFour);
-		assertNotNull(personFour.getId());
-		assertNotNull(personFour.getLinks());
-		
-		assertNotNull(personFour.toString().contains("links: [</api/person/v1/4>;rel=\"self\"]"));
-		
-		assertEquals("First Name Test4", personFour.getFirstName());
-		assertEquals("Last Name Test4", personFour.getLastName());
-		assertEquals("Addres Test4", personFour.getAddress());
-		assertEquals("Male", personFour.getGender());
-		
-		var personSeven = people.get(7);
-		
-		assertNotNull(personSeven);
-		assertNotNull(personSeven.getId());
-		assertNotNull(personSeven.getLinks());
-		
-		assertNotNull(personSeven.toString().contains("links: [</api/person/v1/7>;rel=\"self\"]"));
-		
-		assertEquals("First Name Test7", personSeven.getFirstName());
-		assertEquals("Last Name Test7", personSeven.getLastName());
-		assertEquals("Addres Test7", personSeven.getAddress());
-		assertEquals("Female", personSeven.getGender());
 	}
 
 	@Test
@@ -202,6 +150,57 @@ class PersonServiceTest {
 		when(repository.findById(1L)).thenReturn(Optional.of(entity));
 		
 		service.delete(1L);
+	}
+	
+	@Test
+	void testFindAll() {
+		List<Person> list = input.mockEntityList();
+		
+		when(repository.findAll()).thenReturn(list);
+		
+		var people = service.findAll();
+		
+		assertNotNull(people);
+		assertEquals(14, people.size());
+		
+		var personOne = people.get(1);
+		
+		assertNotNull(personOne);
+		assertNotNull(personOne.getId());
+		assertNotNull(personOne.getLinks());
+		
+		assertNotNull(personOne.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+		
+		assertEquals("First Name Test1", personOne.getFirstName());
+		assertEquals("Last Name Test1", personOne.getLastName());
+		assertEquals("Addres Test1", personOne.getAddress());
+		assertEquals("Female", personOne.getGender());
+		
+		var personFour = people.get(4);
+		
+		assertNotNull(personFour);
+		assertNotNull(personFour.getId());
+		assertNotNull(personFour.getLinks());
+		
+		assertNotNull(personFour.toString().contains("links: [</api/person/v1/4>;rel=\"self\"]"));
+		
+		assertEquals("First Name Test4", personFour.getFirstName());
+		assertEquals("Last Name Test4", personFour.getLastName());
+		assertEquals("Addres Test4", personFour.getAddress());
+		assertEquals("Male", personFour.getGender());
+		
+		var personSeven = people.get(7);
+		
+		assertNotNull(personSeven);
+		assertNotNull(personSeven.getId());
+		assertNotNull(personSeven.getLinks());
+		
+		assertNotNull(personSeven.toString().contains("links: [</api/person/v1/7>;rel=\"self\"]"));
+		
+		assertEquals("First Name Test7", personSeven.getFirstName());
+		assertEquals("Last Name Test7", personSeven.getLastName());
+		assertEquals("Addres Test7", personSeven.getAddress());
+		assertEquals("Female", personSeven.getGender());
 	}
 
 }

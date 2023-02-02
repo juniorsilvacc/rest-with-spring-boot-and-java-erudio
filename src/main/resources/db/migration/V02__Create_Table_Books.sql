@@ -1,7 +1,7 @@
 CREATE TABLE `books` (
 	`id` BIGINT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-	`author` LONGTEXT,
-	`launch_date` DATETIME NOT NULL,
+	`author` VARCHAR(120),
+	`launch_date` DATE NOT NULL,
 	`price` DECIMAL(65,2) NOT NULL,
-  	`title` LONGTEXT
-);     
+  	`title` VARCHAR(180)
+);
