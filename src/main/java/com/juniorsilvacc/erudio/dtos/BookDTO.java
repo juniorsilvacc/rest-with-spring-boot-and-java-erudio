@@ -21,14 +21,14 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 	@JsonProperty("launch_date")
 	private Date launchDate;
 	
-	private double price;
+	private Double price;
 	
 	private String title;
 	
 	public BookDTO() {
 	}
 	
-	public BookDTO(Long id, String author, Date launchDate, double price, String title) {
+	public BookDTO(Long id, String author, Date launchDate, Double price, String title) {
 		this.id = id;
 		this.author = author;
 		this.launchDate = launchDate;
@@ -37,11 +37,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 	}
 	
 	public BookDTO(Book book) {
-		this.id = book.getId();
-		this.author = book.getAuthor();
-		this.launchDate = book.getLaunchDate();
-		this.price = book.getPrice();
-		this.title = book.getTitle();
+		id = book.getId();
+		author = book.getAuthor();
+		launchDate = book.getLaunchDate();
+		price = book.getPrice();
+		title = book.getTitle();
 	}
 
 	public Long getId() {
@@ -68,11 +68,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 		this.launchDate = launchDate;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
