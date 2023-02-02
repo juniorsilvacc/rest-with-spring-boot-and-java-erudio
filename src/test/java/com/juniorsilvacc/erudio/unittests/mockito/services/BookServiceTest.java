@@ -19,10 +19,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.juniorsilvacc.erudio.dtos.BookDTO;
-import com.juniorsilvacc.erudio.dtos.PersonDTO;
 import com.juniorsilvacc.erudio.exceptions.RequiredObjectIsNullException;
 import com.juniorsilvacc.erudio.models.Book;
-import com.juniorsilvacc.erudio.models.Person;
 import com.juniorsilvacc.erudio.repositories.BookRepository;
 import com.juniorsilvacc.erudio.services.BookService;
 import com.juniorsilvacc.erudio.unittests.mocks.MockBook;
