@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.juniorsilvacc.erudio.models.Book;
 
-@JsonPropertyOrder({"id", "author", "launchDate", "price", "title"})
+@JsonPropertyOrder({"id", "author", "launch_date", "price", "title"})
 public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {
 
 	private static final long serialVersionUID = 1L; 
