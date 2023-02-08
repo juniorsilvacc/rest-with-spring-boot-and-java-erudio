@@ -1,0 +1,4 @@
+CREATE TABLE `permission` (
+	`id` BIGINT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	`description` VARCHAR(255) NOT NULL
+);
