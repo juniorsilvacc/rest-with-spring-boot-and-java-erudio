@@ -11,74 +11,75 @@ public class TokenDTO implements Serializable {
 	private String userName;
 	private Boolean authenticated;
 	private Date created;
-	private Date expirateion;
+	private Date expiration;
 	private String accessToken;
 	private String refreshToken;
 	
 	public TokenDTO() {
 	}
 
-	public TokenDTO(String userName, Boolean authenticated, Date created, Date expirateion, String accessToken,
+	public TokenDTO(String userName, Boolean authenticated, Date created, Date expiration, String accessToken,
 			String refreshToken) {
+		super();
 		this.userName = userName;
 		this.authenticated = authenticated;
 		this.created = created;
-		this.expirateion = expirateion;
+		this.expiration = expiration;
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public Boolean getAuthenticated() {
 		return authenticated;
 	}
-	
+
 	public void setAuthenticated(Boolean authenticated) {
 		this.authenticated = authenticated;
 	}
-	
+
 	public Date getCreated() {
 		return created;
 	}
-	
+
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-	public Date getExpirateion() {
-		return expirateion;
+
+	public Date getExpiration() {
+		return expiration;
 	}
-	
-	public void setExpirateion(Date expirateion) {
-		this.expirateion = expirateion;
+
+	public void setExpiration(Date expiration) {
+		this.expiration = expiration;
 	}
-	
+
 	public String getAccessToken() {
 		return accessToken;
 	}
-	
+
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
-	
+
 	public String getRefreshToken() {
 		return refreshToken;
 	}
-	
+
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(accessToken, authenticated, created, expirateion, refreshToken, userName);
+		return Objects.hash(accessToken, authenticated, created, expiration, refreshToken, userName);
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class TokenDTO implements Serializable {
 			return false;
 		TokenDTO other = (TokenDTO) obj;
 		return Objects.equals(accessToken, other.accessToken) && Objects.equals(authenticated, other.authenticated)
-				&& Objects.equals(created, other.created) && Objects.equals(expirateion, other.expirateion)
+				&& Objects.equals(created, other.created) && Objects.equals(expiration, other.expiration)
 				&& Objects.equals(refreshToken, other.refreshToken) && Objects.equals(userName, other.userName);
 	}
 
