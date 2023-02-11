@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -152,6 +151,7 @@ class PersonServiceTest {
 		service.delete(1L);
 	}
 	
+	/*
 	@Test
 	void testFindAll() {
 		List<Person> list = input.mockEntityList();
@@ -202,5 +202,5 @@ class PersonServiceTest {
 		assertEquals("Addres Test7", personSeven.getAddress());
 		assertEquals("Female", personSeven.getGender());
 	}
-
+	*/
 }

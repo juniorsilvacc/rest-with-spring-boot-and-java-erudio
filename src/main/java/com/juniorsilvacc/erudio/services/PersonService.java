@@ -1,14 +1,15 @@
 package com.juniorsilvacc.erudio.services;
 
-import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.juniorsilvacc.erudio.controllers.PersonController;
 import com.juniorsilvacc.erudio.dtos.PersonDTO;
@@ -38,14 +39,23 @@ public class PersonService {
 		
 	}
 	
-	public List<PersonDTO> findAll() {
-		List<Person> persons = repository.findAll();
+	public Page<PersonDTO> findAll(Pageable pageable) {
+//		var persons = repository.findAll();
+//		
+//		var listPersons = persons.stream().map(PersonDTO::new).collect(Collectors.toList());
+//		
+//		listPersons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getId())).withSelfRel()));
+//		
+//		return listPersons;
+		var personPage = repository.findAll(pageable);
 		
-		var listPersons = persons.stream().map(PersonDTO::new).collect(Collectors.toList());
+		var personDtoPage = personPage.map(PersonDTO::new);
+		personDtoPage.map(
+				p -> p.add(
+						linkTo(methodOn(PersonController.class)
+								.findById(p.getId())).withSelfRel()));
 		
-		listPersons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getId())).withSelfRel()));
-		
-		return listPersons;
+		return personDtoPage;
 	}
 	
 	public PersonDTO create(Person person) {

@@ -1,6 +1,7 @@
 package com.juniorsilvacc.erudio.integrationtests.controller.withjson;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -104,6 +105,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		assertNotNull(createPerson.getLastName());
 		assertNotNull(createPerson.getAddress());
 		assertNotNull(createPerson.getGender());
+		assertTrue(createPerson.getEnabled());
 		
 		assertTrue(createPerson.getId() > 0);
 		
@@ -162,6 +164,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		assertNotNull(createPerson.getLastName());
 		assertNotNull(createPerson.getAddress());
 		assertNotNull(createPerson.getGender());
+		assertFalse(createPerson.getEnabled());
 		
 		assertTrue(createPerson.getId() > 0);
 		
@@ -192,13 +195,14 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		assertNotNull(content);
 		assertEquals("Invalid CORS request", content);
 	}
-
+	
 	private void mockPerson() {
 		person.setId(1L);
 		person.setFirstName("Paul");
 		person.setLastName("Walker");
 		person.setAddress("New York City, New York - US");
 		person.setGender("Male");
+		person.setEnabled(true);
 	}
 	
 }
