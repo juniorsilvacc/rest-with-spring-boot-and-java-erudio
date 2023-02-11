@@ -17,6 +17,8 @@ import com.juniorsilvacc.erudio.exceptions.ResourceNotFoundException;
 import com.juniorsilvacc.erudio.models.Person;
 import com.juniorsilvacc.erudio.repositories.PersonRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PersonService {
 
@@ -83,6 +85,21 @@ public class PersonService {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 		
 		repository.delete(entity);
+	}
+	
+	@Transactional
+	public PersonDTO disabledPerson(Long id) {
+		repository.disabledPerson(id);
+		
+		Person entity = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+		
+		PersonDTO dto = new PersonDTO(entity);
+		
+		dto.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		
+		return dto;
+		
 	}
 	
 }

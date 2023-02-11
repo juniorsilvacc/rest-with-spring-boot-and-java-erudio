@@ -36,9 +36,8 @@ public class AbstractIntegrationTest {
 			
 			ConfigurableEnvironment environment = applicationContext.getEnvironment();
 			MapPropertySource testContainers = new MapPropertySource(
-					"testcontainers", (Map) 
-					createConnectionConfiguration()
-				);
+					"testcontainers", 
+					(Map) createConnectionConfiguration());
 			
 			environment.getPropertySources().addFirst(testContainers);
 		}
