@@ -7,8 +7,11 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
 import com.juniorsilvacc.erudio.controllers.PersonController;
@@ -26,6 +29,9 @@ public class PersonService {
 	@Autowired
 	private PersonRepository repository;
 	
+	@Autowired
+	PagedResourcesAssembler<PersonDTO> assembler;
+	
 	public PersonDTO findById(Long id) {
 		
 		Person entity = repository.findById(id)
@@ -39,7 +45,7 @@ public class PersonService {
 		
 	}
 	
-	public Page<PersonDTO> findAll(Pageable pageable) {
+	public PagedModel<EntityModel<PersonDTO>> findAll(Pageable pageable) {
 //		var persons = repository.findAll();
 //		
 //		var listPersons = persons.stream().map(PersonDTO::new).collect(Collectors.toList());
@@ -55,7 +61,8 @@ public class PersonService {
 						linkTo(methodOn(PersonController.class)
 								.findById(p.getId())).withSelfRel()));
 		
-		return personDtoPage;
+		Link link = linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+		return assembler.toModel(personDtoPage, link );
 	}
 	
 	public PersonDTO create(Person person) {
