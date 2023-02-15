@@ -65,6 +65,19 @@ public class PersonService {
 		return assembler.toModel(personDtoPage, link );
 	}
 	
+	public PagedModel<EntityModel<PersonDTO>> findPersonByName(String firstName, Pageable pageable) {
+		var personPage = repository.findPersonByName(firstName, pageable);
+		
+		var personDtoPage = personPage.map(PersonDTO::new);
+		personDtoPage.map(
+				p -> p.add(
+						linkTo(methodOn(PersonController.class)
+								.findById(p.getId())).withSelfRel()));
+		
+		Link link = linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+		return assembler.toModel(personDtoPage, link );
+	}
+	
 	public PersonDTO create(Person person) {
 		if(person == null) throw new RequiredObjectIsNullException();
 		
